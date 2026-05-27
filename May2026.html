@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORO - Investor Review - May 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1A3F6F;--navy2:#2D6AA0;--navy3:#5B92C0;--navy4:#85B7EB;
+  --gold:#D4A843;--goldd:#B8860B;--goldbg:#F5E6C0;--gold2:#E8C27A;--gold3:#F5DC90;
+  --dark:#1C1C1E;--white:#FFFFFF;--surf:#F8F7F4;--surf2:#F0EEE9;
+  --ink:#1C1C1E;--ink60:#666664;--ink30:#B0AFAC;--border:rgba(0,0,0,0.08);
+  --grn:#2D6A4F;--grn-bg:#EAF4EE;--red:#9B2335;--red-bg:#FAEAEA;
+  --amber:#B85A00;--amber-bg:#FFF0E0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--surf);color:var(--ink);font-size:14px;line-height:1.6}
+.cover{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:60px 80px;background:var(--dark);color:#fff}
+.cover-logo{font-family:'DM Serif Display',serif;font-size:48px;color:var(--gold);letter-spacing:.04em}
+.cover-tag{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase;margin-top:4px}
+.cover-mid{flex:1;display:flex;flex-direction:column;justify-content:center;padding:60px 0 30px}
+.cover-eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.cover-headline{font-family:'DM Serif Display',serif;font-size:58px;line-height:1.1;color:#fff;max-width:720px}
+.cover-headline span{color:var(--gold)}
+.cover-partial{display:inline-block;font-size:13px;color:rgba(255,255,255,.5);background:rgba(212,168,67,.15);border:1px solid rgba(212,168,67,.3);border-radius:6px;padding:4px 12px;margin-top:16px}
+.cover-sub{font-size:15px;color:rgba(255,255,255,.45);margin-top:16px;max-width:520px;line-height:1.9}
+.cover-bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:.5px solid rgba(255,255,255,.1);padding-top:22px}
+.cover-kpis{display:flex;gap:56px}
+.cover-kpi-val{font-family:'DM Serif Display',serif;font-size:28px;color:#fff}
+.cover-kpi-label{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.09em;margin-top:2px}
+.cover-date{font-size:11px;color:rgba(255,255,255,.25);text-align:right;line-height:2}
+.page{padding:52px 76px;max-width:1300px;margin:0 auto}
+.page+.page{border-top:1px solid var(--border)}
+.sec-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:26px}
+.sec-title{font-family:'DM Serif Display',serif;font-size:26px;color:var(--navy)}
+.sec-period{font-size:11px;color:var(--ink30);letter-spacing:.05em}
+.partial-note{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--amber);background:var(--amber-bg);border:.5px solid rgba(184,90,0,.25);border-radius:20px;padding:3px 10px;margin-bottom:20px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:28px}
+.kpi{background:#fff;border:.5px solid var(--border);border-radius:12px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.kpi.accent{border-top:3px solid var(--goldd)}
+.kpi-label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink60);margin-bottom:7px}
+.kpi-value{font-family:'DM Serif Display',serif;font-size:26px;color:var(--ink);line-height:1.1}
+.kpi-delta{margin-top:9px}
+.kpi-forecast{margin-top:5px;font-size:10px;color:var(--ink60)}
+.kpi-forecast strong{color:var(--navy)}
+.chip{display:inline-block;font-size:10px;padding:3px 9px;border-radius:20px;font-weight:500}
+.chip-up{background:var(--grn-bg);color:var(--grn)}
+.chip-dn{background:var(--red-bg);color:var(--red)}
+.chip-nu{background:var(--surf2);color:var(--ink60)}
+.chip-amber{background:var(--amber-bg);color:var(--amber)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:18px}
+.cc{background:#fff;border:.5px solid var(--border);border-radius:12px;padding:20px 22px}
+.cc.full{grid-column:1/-1}
+.cc-title{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink60);margin-bottom:14px;font-weight:500}
+.leg{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:12px}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink60)}
+.leg-sw{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.daily-wrap{border-radius:12px;padding:24px 30px;margin-bottom:22px;display:flex;gap:0;background:var(--navy)}
+.db{flex:1;padding:0 26px;border-right:.5px solid rgba(255,255,255,.1)}
+.db:first-child{padding-left:0}
+.db:last-child{border-right:none}
+.db-label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,.38);margin-bottom:10px}
+.db-months{display:flex;gap:18px}
+.db-m-label{font-size:10px;color:rgba(255,255,255,.35);margin-bottom:3px}
+.db-m-val{font-family:'DM Serif Display',serif;font-size:28px;color:#fff}
+.db-m-val.hi{color:var(--gold)}
+.db-m-val.ok{color:#7EC8A0}
+.db-m-val.lo{color:#F08080}
+.db-note{margin-top:10px;font-size:11px;color:rgba(255,255,255,.42);border-top:.5px solid rgba(255,255,255,.1);padding-top:10px}
+.db-note strong{color:rgba(255,255,255,.8)}
+.ctx{border-left:3px solid var(--goldd);background:var(--goldbg);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:20px}
+.ctx-title{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--goldd);margin-bottom:10px}
+.ctx-tags{display:flex;flex-wrap:wrap;gap:8px}
+.ctx-tag{font-size:11px;color:var(--ink60);background:#fff;border:.5px solid rgba(184,134,11,.25);border-radius:20px;padding:4px 12px}
+.ctx-tag.recovery{background:var(--grn-bg);border-color:rgba(45,106,79,.25);color:var(--grn)}
+.ctx-tag.risk{background:var(--red-bg);border-color:rgba(155,35,53,.25);color:var(--red)}
+.alert{border-left:3px solid var(--goldd);background:#FFFBF0;border-radius:0 10px 10px 0;padding:14px 18px;margin-top:16px}
+.alert-title{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--goldd);margin-bottom:6px}
+.alert-body{font-size:12px;color:var(--ink60);line-height:1.7}
+.alert-body strong{color:var(--ink)}
+.insight{background:var(--surf2);border-radius:10px;padding:14px 18px;font-size:12px;color:var(--ink60);line-height:1.75;margin-top:16px}
+.insight strong{color:var(--ink)}
+.insight ul{margin:8px 0 0 18px}
+.insight ul li{margin-bottom:4px}
+.gold-stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
+.gold-stat{background:#fff;border:.5px solid var(--border);border-radius:10px;padding:14px 16px;text-align:center}
+.gold-stat-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink60);margin-bottom:5px}
+.gold-stat-val{font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink)}
+.gold-stat-sub{font-size:11px;margin-top:4px}
+.l-table{width:100%;border-collapse:collapse;margin-bottom:16px}
+.l-table td{padding:9px 0;border-bottom:.5px solid var(--border);vertical-align:middle;font-size:12px}
+.l-table tr:last-child td{border-bottom:none}
+.l-name{color:var(--ink);width:200px}
+.l-bar-wrap{padding:0 14px}
+.l-bar-bg{background:var(--surf2);border-radius:4px;height:8px;overflow:hidden}
+.l-bar-fill{height:100%;border-radius:4px}
+.l-amt{font-weight:500;color:var(--ink);width:90px;text-align:right}
+.l-pct{color:var(--ink30);width:44px;text-align:right;font-size:11px}
+.gold-bar-top{height:5px;background:var(--goldd)}
+.footer{background:var(--dark);color:rgba(255,255,255,.28);font-size:11px;padding:22px 76px;display:flex;justify-content:space-between;letter-spacing:.04em}
+.footer strong{color:rgba(255,255,255,.55)}
+.wow-bullet{font-size:12px;color:var(--ink60);line-height:1.75;margin-top:10px;padding-left:4px}
+.wow-bullet li{margin-bottom:6px}
+.wow-bullet strong{color:var(--ink)}
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+  html, body { margin: 0 !important; padding: 0 !important; background: var(--surf) !important; }
+  .cover {
+    width: 100vw; height: 100vh;
+    page-break-after: always; break-after: page;
+    background: var(--dark) !important;
+    padding: 48px 64px !important;
+    box-sizing: border-box;
+  }
+  .page {
+    page-break-before: always; break-before: page;
+    page-break-after: auto;
+    padding: 32px 52px !important;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .page + .page { border-top: none; }
+  .gold-bar-top { display: none !important; }
+  .daily-wrap { background: var(--navy) !important; }
+  .g2 { gap: 12px !important; }
+  .g3 { gap: 12px !important; }
+  .cc { padding: 14px 16px !important; }
+  .kpi { padding: 12px 14px !important; }
+  .kpi-value { font-size: 22px !important; }
+  .sec-title { font-size: 22px !important; }
+  .ctx { padding: 10px 14px !important; }
+  .insight { padding: 10px 14px !important; font-size: 11px !important; }
+  .alert-body { font-size: 11px !important; }
+  img { max-width: 100% !important; display: block !important; }
+  canvas { display: none !important; }
+  .footer { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="gold-bar-top"></div>
+
+<!-- COVER -->
+<div class="cover">
+  <div>
+    <div class="cover-logo">ORO</div>
+    <div class="cover-tag">OTPL - Gold Loan Platform</div>
+  </div>
+  <div class="cover-mid">
+    <div class="cover-eyebrow">Monthly Investor Review</div>
+    <div class="cover-headline">May <span>2026</span><br>Performance<br>Snapshot</div>
+    <div class="cover-partial">&#9200; Data through May 25, 2026 (partial month)</div>
+    <div class="cover-sub">Disbursals · AUM · Customer Acquisition · Gold Rate Trend · Gold Under Management · Lender Exposure<br>Jan 2026 - May 2026</div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-kpis">
+      <div><div class="cover-kpi-val">1,211 Cr</div><div class="cover-kpi-label">AUM · May-26 (INR)</div></div>
+      <div><div class="cover-kpi-val">1,225.5 kg</div><div class="cover-kpi-label">Gold Under Mgmt</div></div>
+      <div><div class="cover-kpi-val">8 Cities</div><div class="cover-kpi-label">Operational</div></div>
+    </div>
+    <div class="cover-date">As of May 25, 2026<br>For Investor Use</div>
+  </div>
+</div>
+
+<!-- PAGE 1: BUSINESS SNAPSHOT -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-title">Business Snapshot - May 2026</div>
+    <div class="sec-period">Month on Month · Jan 2026 - May 2026</div>
+  </div>
+  <div class="partial-note">&#9201; All May figures through May 25, 2026 (17 working days of ~21). MTD actuals from Metabase.</div>
+  <div class="kpi-grid">
+    <div class="kpi accent"><div class="kpi-label">AUM</div><div class="kpi-value">INR 1,211 Cr</div><div class="kpi-delta"><span class="chip chip-up">+2.4% vs Apr</span></div></div>
+    <div class="kpi"><div class="kpi-label">New Disbursals*</div><div class="kpi-value">1,502</div><div class="kpi-delta"><span class="chip chip-dn">-14.7% vs Apr</span></div></div>
+    <div class="kpi"><div class="kpi-label">New Customers*</div><div class="kpi-value">731</div><div class="kpi-delta"><span class="chip chip-dn">-21.7% vs Apr</span></div></div>
+    <div class="kpi"><div class="kpi-label">Total Disbursals*</div><div class="kpi-value">2,744</div><div class="kpi-delta"><span class="chip chip-dn">-5.5% vs Apr</span></div></div>
+  </div>
+
+  <div class="ctx">
+    <div class="ctx-title">May Summary</div>
+    <div class="ctx-tags">
+      <span class="ctx-tag">17 working days captured through May 25 - on a per-day basis, NDs at 88/day vs April 80/day</span>
+      <span class="ctx-tag">Gold rate recovered from 13,523 low (May 6) to 14,032 by May 26 - still 2.9% below pre-crash peak of 14,452</span>
+      <span class="ctx-tag risk">Federal Bank's loan process change has increased TAT per loan, compressing effective daily capacity and suppressing takeover throughput</span>
+      <span class="ctx-tag risk">Although renewals are picking up vs April (+41% daily), the 2% LTV reduction during renewal processing has kept daily renewals 40% below Jan-Mar levels (73/day currently vs 123/day in Jan-Mar)</span>
+      <span class="ctx-tag recovery">AUM has crossed the 1,200 Cr mark - up 34.6% since Jan 2026</span>
+      <span class="ctx-tag recovery">Week 20 (May 11-17): 487 NDs / 26.7 Cr - strongest week of the month, recovery signal into June</span>
+      <span class="ctx-tag">Fresh loans now 66.5% of new disbursals (vs 46.7% in Feb) - mix shift driven by takeover compression</span>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="cc"><div class="cc-title">AUM trajectory (INR Cr)</div><div style="position:relative;height:220px"><canvas id="aum"></canvas></div></div>
+    <div class="cc"><div class="cc-title">Net AUM addition (INR Cr)</div><div style="position:relative;height:220px"><canvas id="netadd"></canvas></div></div>
+  </div>
+  <div class="g2">
+    <div class="cc">
+      <div class="cc-title">New disbursals - volume &amp; value (INR Cr)*</div>
+      <div class="leg"><div class="leg-item"><div class="leg-sw" style="background:#1A3F6F"></div># Loans (bars)</div><div class="leg-item"><div class="leg-sw" style="background:#D4A843"></div>INR Cr (line)</div></div>
+      <div style="position:relative;height:195px"><canvas id="nd"></canvas></div>
+    </div>
+    <div class="cc">
+      <div class="cc-title">Total disbursals - volume &amp; value (INR Cr)*</div>
+      <div class="leg"><div class="leg-item"><div class="leg-sw" style="background:#2D6AA0"></div># Loans (bars)</div><div class="leg-item"><div class="leg-sw" style="background:#D4A843"></div>INR Cr (line)</div></div>
+      <div style="position:relative;height:195px"><canvas id="td"></canvas></div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="cc">
+      <div class="cc-title">New customer acquisition - volume &amp; loan value (INR Cr)*</div>
+      <div class="leg"><div class="leg-item"><div class="leg-sw" style="background:#1A3F6F"></div># New customers (bars)</div><div class="leg-item"><div class="leg-sw" style="background:#D4A843"></div>Loan value INR Cr (line)</div></div>
+      <div style="position:relative;height:195px"><canvas id="cx"></canvas></div>
+    </div>
+    <div class="cc">
+      <div class="cc-title">Renewals disbursed vs releases vs net addition (INR Cr)*</div>
+      <div class="leg">
+        <div class="leg-item"><div class="leg-sw" style="background:#1A3F6F"></div>Renewals disbursed</div>
+        <div class="leg-item"><div class="leg-sw" style="background:#5B92C0"></div>Releases</div>
+        <div class="leg-item"><div class="leg-sw" style="background:#D4A843"></div>Net Addition (line)</div>
+      </div>
+      <div style="position:relative;height:195px"><canvas id="relChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: WEEK ON WEEK -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-title">May - Week on Week Disbursals</div>
+    <div class="sec-period">Weeks 18-21 (Apr 27 - May 25) · Bars = # Loans (left) · Line = INR Cr (right)</div>
+  </div>
+  <div class="cc full">
+    <div class="cc-title">Week-on-week new disbursals - volume (bars) &amp; value INR Cr (line)</div>
+    <div style="position:relative;height:270px"><canvas id="wow"></canvas></div>
+  </div>
+  <div class="g2" style="margin-top:18px">
+    <div class="cc" style="background:var(--surf2);border:none">
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr style="background:var(--dark);color:#fff">
+          <th style="padding:8px 10px;text-align:left;border-radius:6px 0 0 0">Metric</th>
+          <th style="padding:8px;text-align:center">Wk 18<br><span style="font-weight:400;font-size:10px">Apr 27 - May 3</span></th>
+          <th style="padding:8px;text-align:center">Wk 19<br><span style="font-weight:400;font-size:10px">May 4 - May 10</span></th>
+          <th style="padding:8px;text-align:center">Wk 20<br><span style="font-weight:400;font-size:10px">May 11 - May 17</span></th>
+          <th style="padding:8px;text-align:center;border-radius:0 6px 0 0">Wk 21<br><span style="font-weight:400;font-size:10px">May 18 - May 25</span></th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="padding:8px 10px;border-bottom:.5px solid var(--border)">ND Volume</td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">409</td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">383 <span style="color:var(--red);font-size:10px">-6.4%</span></td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">487 <span style="color:var(--grn);font-size:10px">+27.2%</span></td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">455 <span style="color:var(--red);font-size:10px">-6.5%</span></td>
+          </tr>
+          <tr>
+            <td style="padding:8px 10px;border-bottom:.5px solid var(--border)">ND Value (INR Cr)</td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">20.0</td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">21.5 <span style="color:var(--grn);font-size:10px">+7.5%</span></td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">26.7 <span style="color:var(--grn);font-size:10px">+24.2%</span></td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">24.7 <span style="color:var(--red);font-size:10px">-7.5%</span></td>
+          </tr>
+          <tr>
+            <td style="padding:8px 10px;border-bottom:.5px solid var(--border)">Renewals</td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">333</td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">357</td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">424</td>
+            <td style="text-align:center;padding:8px;border-bottom:.5px solid var(--border)">263</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 10px">Total Disbursals</td>
+            <td style="text-align:center;padding:8px">774</td>
+            <td style="text-align:center;padding:8px">773</td>
+            <td style="text-align:center;padding:8px">950</td>
+            <td style="text-align:center;padding:8px">741</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="background:#fff;border:.5px solid var(--border);border-radius:12px;padding:20px 22px">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink60);margin-bottom:12px;font-weight:500">Week-by-Week Highlights</div>
+      <ul class="wow-bullet">
+        <li><strong>Week 18 (Apr 27 - May 3):</strong> Opened soft as gold dipped to 13,523 on May 6 - the monthly low. 409 NDs despite the rate pressure reflected decent underlying demand.</li>
+        <li><strong>Week 19 (May 4 - May 10):</strong> 4-day week post-holiday. Volume eased to 383 NDs but value per loan improved as the takeover mix held at 103. Rate recovery underway.</li>
+        <li><strong>Week 20 (May 11 - May 17):</strong> Standout week at 487 NDs / 26.7 Cr. Gold climbed back above 13,860 triggering a surge in both fresh (304 FL) and takeover (157 TO) disbursals - highest TO count of the month.</li>
+        <li><strong>Week 21 (May 18 - May 25):</strong> 455 NDs / 24.7 Cr. Volume moderated off the Week 20 peak, a normal pattern. Gold closed May at 14,032 - trajectory into June is positive.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3: LOAN TYPE BREAKDOWN -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-title">Loan Type Breakdown - Fresh &amp; Takeover</div>
+    <div class="sec-period">Month on Month · Jan 2026 - May 2026 · * through May 25</div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi accent">
+      <div class="kpi-label">Fresh Loans - May*</div>
+      <div class="kpi-value">999</div>
+      <div class="kpi-delta"><span class="chip chip-dn">-13.0% vs Apr (1,148)</span></div>
+      <div class="kpi-forecast">58.8/day · <strong>Forecast: ~1,234 by May-end</strong></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Fresh Loan Value*</div>
+      <div class="kpi-value">INR 44.3 Cr</div>
+      <div class="kpi-delta"><span class="chip chip-dn">-13.5% vs Apr</span></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Takeovers - May*</div>
+      <div class="kpi-value">446</div>
+      <div class="kpi-delta"><span class="chip chip-dn">-18.8% vs Apr (549)</span></div>
+      <div class="kpi-forecast">26.2/day · <strong>Forecast: ~551 by May-end</strong></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Takeover Value*</div>
+      <div class="kpi-value">INR 35.0 Cr</div>
+      <div class="kpi-delta"><span class="chip chip-dn">-17.3% vs Apr</span></div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="cc">
+      <div class="cc-title">Fresh loans - volume &amp; value (INR Cr)*</div>
+      <div class="leg"><div class="leg-item"><div class="leg-sw" style="background:#2D6A4F"></div># Loans</div><div class="leg-item"><div class="leg-sw" style="background:#D4A843"></div>INR Cr</div></div>
+      <div style="position:relative;height:210px"><canvas id="fl"></canvas></div>
+    </div>
+    <div class="cc">
+      <div class="cc-title">Takeovers - volume &amp; value (INR Cr)*</div>
+      <div class="leg"><div class="leg-item"><div class="leg-sw" style="background:#D4A843"></div># Loans</div><div class="leg-item"><div class="leg-sw" style="background:#9B2335"></div>INR Cr</div></div>
+      <div style="position:relative;height:210px"><canvas id="to"></canvas></div>
+    </div>
+  </div>
+  <div class="cc full">
+    <div class="cc-title">New disbursal mix - Fresh vs Takeover vs DC (stacked volume)*</div>
+    <div style="position:relative;height:200px"><canvas id="mix"></canvas></div>
+  </div>
+  <div class="alert">
+    <div class="alert-title">Takeover Performance - Context vs April and Late March</div>
+    <div class="alert-body">
+      <strong>Avg daily takeovers in May: 26.2/day vs April 25.0/day</strong> - flat on a per-working-day basis; the headline volume decline of 18.8% is a calendar effect (17 vs 22 working days). Federal Bank process changes have increased TAT per loan, directly compressing daily takeover throughput. In late March (comparable rate environment post-crash), TOs ran at approximately <strong>40-45/day</strong> as LTV recovery supported underwriting. A rate hold above 14,000 combined with TAT resolution should push TO volumes toward 30-35/day in June. Feb context: 61.8 TO/day in Feb reflects a different pipeline environment and is not directly comparable.
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4: GOLD RATE -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-title">Gold Rate - Federal Bank Benchmark</div>
+    <div class="sec-period">Daily rate · Nov 2025 - May 2026</div>
+  </div>
+  <div class="gold-stat-row">
+    <div class="gold-stat">
+      <div class="gold-stat-lbl">Nov 1, 2025 (baseline)</div>
+      <div class="gold-stat-val">10,954</div>
+      <div class="gold-stat-sub" style="color:var(--ink30)">start of period</div>
+    </div>
+    <div class="gold-stat" style="border-top:3px solid var(--grn)">
+      <div class="gold-stat-lbl">Mar 12 (pre-crash peak)</div>
+      <div class="gold-stat-val" style="color:var(--grn)">14,452</div>
+      <div class="gold-stat-sub" style="color:var(--grn)">+31.9% from Nov baseline</div>
+    </div>
+    <div class="gold-stat" style="border-top:3px solid var(--red)">
+      <div class="gold-stat-lbl">May 6 (May trough)</div>
+      <div class="gold-stat-val" style="color:var(--red)">13,523</div>
+      <div class="gold-stat-sub" style="color:var(--red)">-6.4% from pre-crash peak</div>
+    </div>
+    <div class="gold-stat" style="border-top:3px solid var(--goldd)">
+      <div class="gold-stat-lbl">May 26 (current)</div>
+      <div class="gold-stat-val" style="color:var(--goldd)">14,032</div>
+      <div class="gold-stat-sub" style="color:var(--amber)">-2.9% below pre-crash peak</div>
+    </div>
+  </div>
+  <div class="cc full">
+    <div class="cc-title">Daily gold rate (Federal Bank benchmark) - Nov 2025 to May 2026</div>
+    <div class="leg">
+      <div class="leg-item"><div class="leg-sw" style="background:#1A3F6F"></div>Gold rate</div>
+      <div class="leg-item"><div class="leg-sw" style="background:rgba(45,106,79,0.35);border:.5px dashed #2D6A4F"></div>Pre-crash peak reference (14,452)</div>
+    </div>
+    <div style="position:relative;height:270px"><canvas id="goldRate"></canvas></div>
+  </div>
+  <div class="cc full" style="margin-top:18px">
+    <div class="cc-title">Monthly gold rate context vs Fresh Loans and Takeover volumes (Jan - May 2026)</div>
+    <div class="leg">
+      <div class="leg-item"><div class="leg-sw" style="background:#2D6A4F"></div>Fresh Loans (bars, left)</div>
+      <div class="leg-item"><div class="leg-sw" style="background:#D4A843"></div>Takeovers (bars, left)</div>
+      <div class="leg-item"><div class="leg-sw" style="background:#1A3F6F"></div>Avg gold rate INR/g (line, right)</div>
+    </div>
+    <div style="position:relative;height:240px"><canvas id="goldFlTo"></canvas></div>
+  </div>
+  <div class="insight">
+    Gold rates drove the Jan-Feb expansion: FL averaged 1,052-1,286/month, TOs surged to 1,359 in Feb as rates crossed 13,000+. The Mar crash compressing rates to sub-13,000 immediately impacted TO economics. <strong>May's rate recovery to 14,032 has not yet translated to TO volume recovery</strong> - avg daily TOs at 26.2/day (May) vs 25.0/day (Apr), because Federal Bank's increased TAT per loan is constraining daily throughput. <strong>Releases in Hyderabad, Chennai, and Vijayawada are the primary drag on GUM addition</strong> - Hyderabad alone saw 53.41 Cr in releases this month (vs 66.06 Cr disbursed, net addition of just 12.66 Cr). Vijayawada is net negative (-1.26 Cr) with releases exceeding new disbursals. Chennai and Hyd together account for 59% of total May releases.
+  </div>
+</div>
+
+<!-- PAGE 5: WORKING-DAY ADJUSTED -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-title">Working-Day Adjusted Performance</div>
+    <div class="sec-period">Jan · Feb · Mar · Apr · May 2026 · Working days: 20 · 22 · 20 · 22 · 17 est. (through May 25)</div>
+  </div>
+  <div class="daily-wrap">
+    <div class="db">
+      <div class="db-label">Avg daily new disbursals (loans/day)</div>
+      <div class="db-months">
+        <div><div class="db-m-label">Jan</div><div class="db-m-val">112</div></div>
+        <div><div class="db-m-label">Feb</div><div class="db-m-val hi">125</div></div>
+        <div><div class="db-m-label">Mar</div><div class="db-m-val ok">114</div></div>
+        <div><div class="db-m-label">Apr</div><div class="db-m-val lo">80</div></div>
+        <div><div class="db-m-label">May*</div><div class="db-m-val ok">88</div></div>
+      </div>
+      <div class="db-note">May (88/day) is <strong>recovering vs Apr (80/day)</strong> - on a working-day basis, May is running ahead of April despite the headline decline.</div>
+    </div>
+    <div class="db">
+      <div class="db-label">Avg daily total disbursals (loans/day)</div>
+      <div class="db-months">
+        <div><div class="db-m-label">Jan</div><div class="db-m-val">228</div></div>
+        <div><div class="db-m-label">Feb</div><div class="db-m-val hi">251</div></div>
+        <div><div class="db-m-label">Mar</div><div class="db-m-val ok">241</div></div>
+        <div><div class="db-m-label">Apr</div><div class="db-m-val lo">132</div></div>
+        <div><div class="db-m-label">May*</div><div class="db-m-val lo">161</div></div>
+      </div>
+      <div class="db-note">May total/day (161) are <strong>+21.9% vs April (132/day)</strong>, as the renewal book stabilises post-LTV adjustment.</div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="cc">
+      <div class="cc-title">New disbursals - raw monthly vs per working day</div>
+      <div class="leg"><div class="leg-item"><div class="leg-sw" style="background:#85B7EB"></div>Raw monthly</div><div class="leg-item"><div class="leg-sw" style="background:#1A3F6F"></div>Per day (line)</div></div>
+      <div style="position:relative;height:230px"><canvas id="ndDay"></canvas></div>
+    </div>
+    <div class="cc">
+      <div class="cc-title">Total disbursals - raw monthly vs per working day</div>
+      <div class="leg"><div class="leg-item"><div class="leg-sw" style="background:#FAC775"></div>Raw monthly</div><div class="leg-item"><div class="leg-sw" style="background:#D4A843"></div>Per day (line)</div></div>
+      <div style="position:relative;height:230px"><canvas id="tdDay"></canvas></div>
+    </div>
+  </div>
+  <div class="insight">
+    The headline May decline of 14.7% in new disbursals is a <strong>calendar effect, not a business deterioration</strong>. On a per-working-day basis, May (88 NDs/day) is running materially ahead of April (80/day). Total disbursals per day have also recovered to 161 from April's 132. If May runs to 21 full working days, the implied full-month ND count is approximately 1,855 - above April's 1,760 on a raw basis.
+  </div>
+</div>
+
+<!-- PAGE 6: GUM -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-title">Gold Under Management</div>
+    <div class="sec-period">Rolling 11 months · Jul 2025 - May 2026</div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi accent"><div class="kpi-label">GUM - May-26</div><div class="kpi-value">1,225.5 kg</div><div class="kpi-delta"><span class="chip chip-up">+42.0% since Jul-25</span></div></div>
+    <div class="kpi"><div class="kpi-label">Net Addition May-26</div><div class="kpi-value">9.15 kg</div><div class="kpi-delta"><span class="chip chip-dn">vs 19.72 kg Apr-26</span></div></div>
+    <div class="kpi"><div class="kpi-label">Avg Monthly (last 6mo)</div><div class="kpi-value">~36 kg</div><div class="kpi-delta"><span class="chip chip-nu">Dec-25 to May-26</span></div></div>
+    <div class="kpi"><div class="kpi-label">Peak Net Addition</div><div class="kpi-value">64.23 kg</div><div class="kpi-delta"><span class="chip chip-nu">Feb-26</span></div></div>
+  </div>
+  <div class="cc full">
+    <div class="cc-title">GUM total kg (bars) &amp; net addition kg (line) · Jul-25 through May-26</div>
+    <div class="leg"><div class="leg-item"><div class="leg-sw" style="background:#1A3F6F"></div>GUM total kg (left axis)</div><div class="leg-item"><div class="leg-sw" style="background:#D4A843"></div>Net addition kg (right axis)</div></div>
+    <div style="position:relative;height:280px"><canvas id="gum"></canvas></div>
+  </div>
+  <div class="insight">
+    Gold under management reached <strong>1,225.5 kg in May 2026</strong>, up from 1,216.43 kg in April. The net addition of <strong>9.15 kg</strong> is significantly below the 6-month average of ~36 kg. The primary driver is elevated releases concentrated in three cities: <strong>Hyderabad (53.41 Cr released vs 66.06 Cr disbursed), Chennai (20.75 Cr released vs 23.45 Cr disbursed), and Vijayawada (8.54 Cr released vs 7.28 Cr disbursed - net negative)</strong>. These three cities account for 65.8% of total May releases (82.70 of 125.72 Cr). Net additions should recover alongside gold rates in June, particularly as renewed loans at lower LTV reduce the incentive to release.
+  </div>
+</div>
+
+<!-- PAGE 7: LENDER AUM -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-title">Lender Wise AUM</div>
+    <div class="sec-period">As of May 2026</div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi accent"><div class="kpi-label">GL AUM (Gold Loan)</div><div class="kpi-value">INR 1,105.4 Cr</div><div class="kpi-delta"><span class="chip chip-nu">3 lending partners</span></div></div>
+    <div class="kpi"><div class="kpi-label">SL AUM (Secured Loan)</div><div class="kpi-value">INR 105.7 Cr</div><div class="kpi-delta"><span class="chip chip-nu">3 lending partners</span></div></div>
+    <div class="kpi"><div class="kpi-label">Total AUM (GL + SL)</div><div class="kpi-value">INR 1,211.1 Cr</div><div class="kpi-delta"><span class="chip chip-up">+2.4% vs Apr</span></div></div>
+    <div class="kpi"><div class="kpi-label">Federal Bank share</div><div class="kpi-value">96.6%</div><div class="kpi-delta"><span class="chip chip-nu">of GL AUM</span></div></div>
+  </div>
+  <div class="g2">
+    <div class="cc">
+      <div class="cc-title">GL partners - AUM (INR Cr) · May-26</div>
+      <table class="l-table">
+        <tr><td class="l-name">Federal Bank</td><td class="l-bar-wrap"><div class="l-bar-bg"><div class="l-bar-fill" style="width:96.6%;background:#1A3F6F"></div></div></td><td class="l-amt">1,067.6 Cr</td><td class="l-pct">96.6%</td></tr>
+        <tr><td class="l-name">Triplicane Permanent Fund</td><td class="l-bar-wrap"><div class="l-bar-bg"><div class="l-bar-fill" style="width:3.25%;background:#5B92C0"></div></div></td><td class="l-amt">35.95 Cr</td><td class="l-pct">3.3%</td></tr>
+        <tr><td class="l-name">Tenmark Capital Pvt Ltd</td><td class="l-bar-wrap"><div class="l-bar-bg"><div class="l-bar-fill" style="width:0.15%;background:#85B7EB"></div></div></td><td class="l-amt">1.67 Cr</td><td class="l-pct">0.2%</td></tr>
+      </table>
+      <div style="position:relative;height:160px"><canvas id="glPie"></canvas></div>
+    </div>
+    <div class="cc">
+      <div class="cc-title">SL partners - AUM (INR Cr) · May-26</div>
+      <table class="l-table">
+        <tr><td class="l-name">Tenmark Capital Pvt Ltd</td><td class="l-bar-wrap"><div class="l-bar-bg"><div class="l-bar-fill" style="width:64.9%;background:#B8860B"></div></div></td><td class="l-amt">68.60 Cr</td><td class="l-pct">64.9%</td></tr>
+        <tr><td class="l-name">Kumbhat Financial Services</td><td class="l-bar-wrap"><div class="l-bar-bg"><div class="l-bar-fill" style="width:22.9%;background:#D4A843"></div></div></td><td class="l-amt">24.20 Cr</td><td class="l-pct">22.9%</td></tr>
+        <tr><td class="l-name">Sunita Finlease Ltd</td><td class="l-bar-wrap"><div class="l-bar-bg"><div class="l-bar-fill" style="width:12.2%;background:#F5DC90;outline:.5px solid #D4A843"></div></div></td><td class="l-amt">12.92 Cr</td><td class="l-pct">12.2%</td></tr>
+      </table>
+      <div style="position:relative;height:160px"><canvas id="slPie"></canvas></div>
+    </div>
+  </div>
+  <div class="insight">
+    Federal Bank anchors <strong>96.6% of the GL book at 1,067.6 Cr</strong>. Total AUM of 1,211.1 Cr (GL + SL) reflects continued growth despite May headwinds - crossing the 1,200 Cr mark for the first time. City-wise, Hyderabad leads GL AUM at 541.21 Cr (44.7% of total AUM), followed by Bengaluru (239.55 Cr) and Chennai (179.70 Cr). SL book at 105.7 Cr is diversified across Tenmark, Kumbhat, and Sunita Finlease. Lender concentration in GL remains the key structural risk - Federal Bank dependency requires active diversification planning through FY27.
+  </div>
+</div>
+
+<div class="footer">
+  <span><strong>ORO - OTPL</strong> &nbsp;·&nbsp; Investor Review · May 2026 · Partial Month through May 25</span>
+  <span>For Investor Use</span>
+</div>
+
+<script>
+Chart.register(ChartDataLabels);
+
+const M  = ["Jan-26","Feb-26","Mar-26","Apr-26","May-26*"];
+const W  = ["Wk 18","Wk 19","Wk 20","Wk 21"];
+const G  = "rgba(0,0,0,0.05)", T = "#999";
+
+// VOLUMES
+const ndVol  = [2249,2752,2279,1760,1502];
+const tdVol  = [4569,5512,4814,2903,2744];
+const cxVol  = [1152,1451,1165,933,731];
+const flVol  = [1052,1286,1351,1148,999];
+const toVol  = [1089,1359,824,549,446];
+const dcVol  = [108,107,104,63,57];
+const wVol   = [409,383,487,455];
+
+// VALUES
+const ndCr   = [125.8,171.6,128.5,94.3,80.35];
+const tdCr   = [265.0,369.2,302.5,164.5,159.07];
+const cxCr   = [61.2,87.7,64.5,53.6,41.6];
+const flCr   = [41.2,62.7,64.1,51.2,44.3];
+const toCr   = [82.2,106.2,62.0,42.3,35.0];
+const wCr    = [20.0,21.5,26.7,24.7];
+
+// AUM & NET ADD
+const aumCr  = [898.5,1025.2,1138.5,1182.7,1211.11];
+const netCr  = [74.9,126.7,113.3,44.2,33.35];
+const relCr  = [190.1,242.5,189.2,120.3,125.72];
+
+// GUM
+const gumLbls = ["Jul-25","Aug-25","Sep-25","Oct-25","Nov-25","Dec-25","Jan-26","Feb-26","Mar-26","Apr-26","May-26"];
+const gumKg   = [863.4,889.52,891.5,921.79,983.37,1035.85,1075.51,1139.72,1196.74,1216.43,1225.54];
+const gumAdd  = [35.49,26.1,8.97,23.27,61.62,52.47,39.66,64.23,56.98,19.72,9.15];
+
+// GOLD RATE
+const goldLbls = ["1-Nov","1-Dec","1-Jan","1-Feb","1-Mar","Mar 12\nPeak","Mar 20","Mar 24\nTrough","Mar 31","1-May","May 6\nTrough","May 15","May 26"];
+const goldData = [10954,11295,11891,13059,14217,14452,13546,12784,13440,13702,13523,13827,14032];
+
+// Avg gold rate per month (approximate for FL/TO chart)
+const goldAvgMon = [11600,12800,14100,13500,13750]; // Jan-May approx
+
+const scales2 = (yLc,y2c) => ({
+  x:{grid:{color:G},ticks:{color:T,font:{size:11},autoSkip:false,maxRotation:0}},
+  y:{position:"left",grid:{color:G},ticks:{color:yLc,font:{size:11}},beginAtZero:true},
+  y2:{position:"right",grid:{display:false},ticks:{color:y2c,font:{size:11}}}
+});
+
+function comboChart(id,labels,vol,cr,barColor,lineColor,lineLblColor){
+  new Chart(id,{type:"bar",data:{labels,datasets:[
+    {type:"bar",label:vol.name,data:vol.values,backgroundColor:barColor,yAxisID:"y",order:2,
+      datalabels:{anchor:"end",align:"top",color:barColor,font:{size:9,weight:"500"},formatter:v=>v.toLocaleString("en-IN")}},
+    {type:"line",label:cr.name,data:cr.values,borderColor:lineColor,backgroundColor:lineColor,
+      pointBackgroundColor:ctx=>ctx.dataIndex===4?"#9B2335":lineColor,
+      pointRadius:4,tension:0.3,yAxisID:"y2",order:1,
+      datalabels:{anchor:"start",align:"bottom",color:ctx=>ctx.dataIndex===4?"#9B2335":(lineLblColor||lineColor),font:{size:9,weight:"500"},formatter:v=>v.toFixed(1)}}
+  ]},options:{
+    responsive:true,maintainAspectRatio:false,
+    layout:{padding:{top:22,bottom:22}},
+    plugins:{legend:{display:false},tooltip:{mode:"index",intersect:false}},
+    scales:scales2(barColor,lineLblColor||lineColor)
+  }});
+}
+
+// AUM line
+new Chart("aum",{type:"line",data:{labels:M,datasets:[{
+  data:aumCr,borderColor:"#1A3F6F",backgroundColor:"rgba(26,63,111,0.08)",
+  tension:0.4,fill:true,
+  pointBackgroundColor:ctx=>ctx.dataIndex===4?"#D4A843":"#1A3F6F",pointRadius:5,
+  datalabels:{anchor:"top",align:"top",color:ctx=>ctx.dataIndex===4?"#B8860B":"#1A3F6F",font:{size:9},formatter:v=>"INR "+v.toFixed(0)}
+}]},options:{
+  responsive:true,maintainAspectRatio:false,layout:{padding:{top:18}},
+  plugins:{legend:{display:false}},
+  scales:{x:{grid:{color:G},ticks:{color:T,font:{size:11},autoSkip:false,maxRotation:0}},
+    y:{grid:{color:G},ticks:{color:T,font:{size:11},callback:v=>v.toFixed(0)},min:800}}
+}});
+
+// Net addition
+new Chart("netadd",{type:"bar",data:{labels:M,datasets:[{
+  data:netCr,
+  backgroundColor:["#1A3F6F","#D4A843","#2D6A4F","#9B2335","#B85A00"],
+  borderRadius:3,
+  datalabels:{anchor:"end",align:"top",color:T,font:{size:9},formatter:v=>v.toFixed(1)}
+}]},options:{
+  responsive:true,maintainAspectRatio:false,layout:{padding:{top:18}},
+  plugins:{legend:{display:false}},
+  scales:{x:{grid:{color:G},ticks:{color:T,font:{size:11},autoSkip:false,maxRotation:0}},
+    y:{grid:{color:G},ticks:{color:T,font:{size:11}},beginAtZero:true}}
+}});
+
+comboChart("nd",M,{name:"# Loans",values:ndVol},{name:"Value INR Cr",values:ndCr},"#1A3F6F","#D4A843","#B8860B");
+comboChart("td",M,{name:"# Loans",values:tdVol},{name:"Value INR Cr",values:tdCr},"#2D6AA0","#D4A843","#B8860B");
+comboChart("cx",M,{name:"# New Customers",values:cxVol},{name:"Loan Value INR Cr",values:cxCr},"#1A3F6F","#D4A843","#B8860B");
+comboChart("fl",M,{name:"# Fresh Loans",values:flVol},{name:"Value INR Cr",values:flCr},"#2D6A4F","#D4A843","#B8860B");
+
+// Renewals disbursed vs releases vs net addition
+const renewCr = [132.9,189.3,164.1,58.1,78.72]; // renewal disbursal values MoM
+new Chart("relChart",{type:"bar",data:{labels:M,datasets:[
+  {type:"bar",label:"Renewals Disbursed",data:renewCr,backgroundColor:"rgba(26,63,111,0.85)",borderColor:"#1A3F6F",borderWidth:1,yAxisID:"y",order:3,
+    datalabels:{anchor:"end",align:"top",color:"#1A3F6F",font:{size:9,weight:"500"},formatter:v=>v.toFixed(1)}},
+  {type:"bar",label:"Releases",data:relCr,backgroundColor:"rgba(91,146,192,0.85)",borderColor:"#5B92C0",borderWidth:1,yAxisID:"y",order:2,
+    datalabels:{anchor:"end",align:"bottom",color:"#2D6AA0",font:{size:9,weight:"500"},formatter:v=>v.toFixed(1)}},
+  {type:"line",label:"Net Addition",data:netCr,borderColor:"#D4A843",backgroundColor:"rgba(212,168,67,0.08)",
+    pointBackgroundColor:ctx=>ctx.dataIndex===4?"#B8860B":"#D4A843",
+    pointRadius:5,tension:0.3,yAxisID:"y",order:1,fill:false,
+    datalabels:{anchor:"top",align:"top",color:"#B8860B",font:{size:9,weight:"600"},formatter:v=>"+"+v.toFixed(1)}}
+]},options:{
+  responsive:true,maintainAspectRatio:false,layout:{padding:{top:24,bottom:8}},
+  plugins:{legend:{display:true,position:"bottom",labels:{font:{size:10},color:T,boxWidth:10}},
+    tooltip:{mode:"index",intersect:false}},
+  scales:{
+    x:{grid:{color:G},ticks:{color:T,font:{size:11},autoSkip:false,maxRotation:0}},
+    y:{grid:{color:G},ticks:{color:T,font:{size:11}},beginAtZero:true}
+  }
+}});
+
+// Takeover
+new Chart("to",{type:"bar",data:{labels:M,datasets:[
+  {type:"bar",label:"# Takeovers",data:toVol,
+    backgroundColor:ctx=>ctx.dataIndex>=2?"#D4A843":"#1A3F6F",yAxisID:"y",order:2,
+    datalabels:{anchor:"end",align:"top",color:ctx=>ctx.dataIndex>=2?"#B8860B":"#1A3F6F",font:{size:9,weight:"500"},formatter:v=>v.toLocaleString("en-IN")}},
+  {type:"line",label:"Value INR Cr",data:toCr,borderColor:"#9B2335",backgroundColor:"#9B2335",
+    pointBackgroundColor:ctx=>ctx.dataIndex>=2?"#9B2335":"#D4A843",pointRadius:4,tension:0.3,
+    yAxisID:"y2",order:1,
+    datalabels:{anchor:"start",align:"bottom",color:ctx=>ctx.dataIndex>=2?"#9B2335":"#B8860B",font:{size:9,weight:"500"},formatter:v=>v.toFixed(1)}}
+]},options:{
+  responsive:true,maintainAspectRatio:false,layout:{padding:{top:22,bottom:22}},
+  plugins:{legend:{display:false}},scales:scales2("#1A3F6F","#9B2335")
+}});
+
+// Stacked mix
+new Chart("mix",{type:"bar",data:{labels:M,datasets:[
+  {label:"Fresh Loan",data:flVol,backgroundColor:"#1A3F6F",stack:"s",
+    datalabels:{color:"#fff",font:{size:9},anchor:"center",align:"center",formatter:v=>v}},
+  {label:"Takeover",data:toVol,backgroundColor:"#D4A843",stack:"s",
+    datalabels:{color:"#1C1C1E",font:{size:9},anchor:"center",align:"center",formatter:v=>v}},
+  {label:"DC",data:dcVol,backgroundColor:"#85B7EB",stack:"s",
+    datalabels:{color:"#1A3F6F",font:{size:9},anchor:"center",align:"center",formatter:v=>v}},
+]},options:{
+  responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:true,position:"bottom",labels:{font:{size:11},color:T,boxWidth:10}}},
+  scales:{
+    x:{stacked:true,grid:{color:G},ticks:{color:T,font:{size:11},autoSkip:false,maxRotation:0}},
+    y:{stacked:true,grid:{color:G},ticks:{color:T,font:{size:11}},beginAtZero:true}
+  }
+}});
+
+// Gold rate line
+new Chart("goldRate",{type:"line",data:{labels:goldLbls,datasets:[
+  {label:"Gold Rate",data:goldData,borderColor:"#1A3F6F",
+    pointBackgroundColor:ctx=>{
+      const i=ctx.dataIndex;
+      if(i===5) return "#2D6A4F";
+      if(i===7||i===10) return "#9B2335";
+      if(i===12) return "#B8860B";
+      return "#1A3F6F";
+    },
+    pointRadius:ctx=>[3,3,3,3,3,7,4,7,4,3,7,4,7][ctx.dataIndex]||3,
+    borderWidth:2,tension:0.3,
+    segment:{borderColor:ctx=>{
+      const i=ctx.p0DataIndex;
+      if(i>=4&&i<=6) return "#9B2335";
+      if(i>=7&&i<=8) return "#D4A843";
+      if(i===9) return "#9B2335";
+      if(i>=10) return "#D4A843";
+      return "#1A3F6F";
+    }},
+    datalabels:{
+      display:ctx=>[0,5,7,10,12].includes(ctx.dataIndex),
+      anchor:ctx=>ctx.dataIndex===7||ctx.dataIndex===10?"start":"end",
+      align:ctx=>ctx.dataIndex===7||ctx.dataIndex===10?"bottom":"top",
+      color:ctx=>{const i=ctx.dataIndex;if(i===5)return"#2D6A4F";if(i===7||i===10)return"#9B2335";if(i>=9)return"#B8860B";return"#1A3F6F";},
+      font:{size:9,weight:"500"},formatter:v=>v.toLocaleString("en-IN")
+    }
+  },
+  {label:"Pre-crash peak (14,452)",data:Array(goldLbls.length).fill(14452),
+    borderColor:"rgba(45,106,79,0.35)",borderDash:[6,4],borderWidth:1.5,pointRadius:0,datalabels:{display:false}}
+]},options:{
+  responsive:true,maintainAspectRatio:false,layout:{padding:{top:24,bottom:8}},
+  plugins:{legend:{display:true,position:"bottom",labels:{font:{size:11},color:T,boxWidth:10}}},
+  scales:{
+    x:{grid:{color:G},ticks:{color:T,font:{size:10},autoSkip:false,maxRotation:30}},
+    y:{grid:{color:G},ticks:{color:T,font:{size:11}},min:10500,max:15000}
+  }
+}});
+
+// Gold rate + FL + TO stacked bars - improved colors
+new Chart("goldFlTo",{type:"bar",data:{labels:M,datasets:[
+  {type:"bar",label:"Fresh Loans (#)",data:flVol,backgroundColor:"rgba(26,63,111,0.85)",borderColor:"#1A3F6F",borderWidth:1,yAxisID:"y",order:3,stack:"s",
+    datalabels:{color:"#fff",font:{size:9,weight:"500"},anchor:"center",align:"center",formatter:v=>v.toLocaleString("en-IN")}},
+  {type:"bar",label:"Takeovers (#)",data:toVol,backgroundColor:"rgba(91,146,192,0.85)",borderColor:"#5B92C0",borderWidth:1,yAxisID:"y",order:2,stack:"s",
+    datalabels:{color:"#fff",font:{size:9,weight:"500"},anchor:"center",align:"center",formatter:v=>v.toLocaleString("en-IN")}},
+  {type:"line",label:"Avg Gold Rate INR/g",data:goldAvgMon,borderColor:"#D4A843",backgroundColor:"rgba(212,168,67,0.10)",
+    pointBackgroundColor:"#D4A843",pointRadius:6,tension:0.3,yAxisID:"y2",order:1,fill:false,
+    datalabels:{anchor:"top",align:"top",color:"#B8860B",font:{size:9,weight:"600"},formatter:v=>v.toLocaleString("en-IN")}}
+]},options:{
+  responsive:true,maintainAspectRatio:false,layout:{padding:{top:24,bottom:8}},
+  plugins:{legend:{display:true,position:"bottom",labels:{font:{size:11},color:T,boxWidth:10}},
+    tooltip:{mode:"index",intersect:false}},
+  scales:{
+    x:{stacked:true,grid:{color:G},ticks:{color:T,font:{size:11},autoSkip:false,maxRotation:0}},
+    y:{stacked:true,position:"left",grid:{color:G},ticks:{color:T,font:{size:11}},beginAtZero:true},
+    y2:{position:"right",grid:{display:false},ticks:{color:"#B8860B",font:{size:11}},min:10000}
+  }
+}});
+
+// WoW chart
+new Chart("wow",{type:"bar",data:{labels:W,datasets:[
+  {type:"bar",label:"# NDs",data:wVol,
+    backgroundColor:["#2D6AA0","#85B7EB","#1A3F6F","#2D6AA0"],
+    yAxisID:"y",order:2,
+    datalabels:{anchor:"end",align:"top",color:["#2D6AA0","#5B92C0","#1A3F6F","#2D6AA0"],font:{size:10,weight:"500"},formatter:v=>v.toLocaleString("en-IN")}},
+  {type:"line",label:"Value INR Cr",data:wCr,borderColor:"#D4A843",backgroundColor:"#D4A843",
+    pointBackgroundColor:"#D4A843",pointRadius:5,tension:0.3,yAxisID:"y2",order:1,
+    datalabels:{anchor:"start",align:"bottom",color:"#B8860B",font:{size:10,weight:"500"},formatter:v=>v.toFixed(1)}}
+]},options:{
+  responsive:true,maintainAspectRatio:false,layout:{padding:{top:22,bottom:22}},
+  plugins:{legend:{display:true,position:"bottom",labels:{font:{size:11},color:T,boxWidth:10}}},
+  scales:{
+    x:{grid:{color:G},ticks:{color:T,font:{size:12},autoSkip:false,maxRotation:0}},
+    y:{position:"left",grid:{color:G},ticks:{color:"#1A3F6F",font:{size:11}},beginAtZero:true},
+    y2:{position:"right",grid:{display:false},ticks:{color:"#B8860B",font:{size:11}},beginAtZero:true}
+  }
+}});
+
+// Working day charts
+new Chart("ndDay",{type:"bar",data:{labels:M,datasets:[
+  {type:"bar",label:"Raw monthly",data:[2249,2752,2279,1760,1502],
+    backgroundColor:["#85B7EB","#85B7EB","#85B7EB","rgba(155,35,53,0.3)","rgba(184,90,0,0.35)"],yAxisID:"y",order:2,
+    datalabels:{anchor:"end",align:"top",color:ctx=>ctx.dataIndex===3?"#9B2335":ctx.dataIndex===4?"#B85A00":"#2D6AA0",font:{size:10,weight:"500"},formatter:v=>v.toLocaleString("en-IN")}},
+  {type:"line",label:"Per day",data:[112,125,114,80,88],borderColor:"#1A3F6F",
+    pointBackgroundColor:ctx=>ctx.dataIndex===3?"#9B2335":ctx.dataIndex===4?"#2D6A4F":"#1A3F6F",
+    pointRadius:6,tension:0,yAxisID:"y2",order:1,
+    datalabels:{anchor:"start",align:"bottom",color:ctx=>ctx.dataIndex===3?"#9B2335":ctx.dataIndex===4?"#2D6A4F":"#1A3F6F",font:{size:11,weight:"500"},formatter:v=>v+"/day"}}
+]},options:{
+  responsive:true,maintainAspectRatio:false,layout:{padding:{top:22,bottom:22}},
+  plugins:{legend:{display:true,position:"bottom",labels:{font:{size:11},color:T,boxWidth:10}}},
+  scales:{
+    x:{grid:{color:G},ticks:{color:T,font:{size:11},autoSkip:false,maxRotation:0}},
+    y:{position:"left",grid:{color:G},ticks:{color:"#2D6AA0",font:{size:11}},beginAtZero:true},
+    y2:{position:"right",grid:{display:false},ticks:{color:"#1A3F6F",font:{size:11}},min:70,max:140}
+  }
+}});
+
+new Chart("tdDay",{type:"bar",data:{labels:M,datasets:[
+  {type:"bar",label:"Raw monthly",data:[4569,5512,4814,2903,2744],
+    backgroundColor:["#FAC775","#FAC775","#FAC775","rgba(155,35,53,0.3)","rgba(184,90,0,0.35)"],yAxisID:"y",order:2,
+    datalabels:{anchor:"end",align:"top",color:ctx=>ctx.dataIndex===3?"#9B2335":ctx.dataIndex===4?"#B85A00":"#B8860B",font:{size:10,weight:"500"},formatter:v=>v.toLocaleString("en-IN")}},
+  {type:"line",label:"Per day",data:[228,251,241,132,161],borderColor:"#D4A843",
+    pointBackgroundColor:ctx=>ctx.dataIndex===3?"#9B2335":ctx.dataIndex===4?"#2D6A4F":"#D4A843",
+    pointRadius:6,tension:0,yAxisID:"y2",order:1,
+    datalabels:{anchor:"start",align:"bottom",color:ctx=>ctx.dataIndex===3?"#9B2335":ctx.dataIndex===4?"#2D6A4F":"#B8860B",font:{size:11,weight:"500"},formatter:v=>v+"/day"}}
+]},options:{
+  responsive:true,maintainAspectRatio:false,layout:{padding:{top:22,bottom:22}},
+  plugins:{legend:{display:true,position:"bottom",labels:{font:{size:11},color:T,boxWidth:10}}},
+  scales:{
+    x:{grid:{color:G},ticks:{color:T,font:{size:11},autoSkip:false,maxRotation:0}},
+    y:{position:"left",grid:{color:G},ticks:{color:"#B8860B",font:{size:11}},beginAtZero:true},
+    y2:{position:"right",grid:{display:false},ticks:{color:"#D4A843",font:{size:11}},min:110,max:270}
+  }
+}});
+
+// GUM
+new Chart("gum",{type:"bar",data:{labels:gumLbls,datasets:[
+  {type:"bar",label:"GUM (kg)",data:gumKg,backgroundColor:"#1A3F6F",yAxisID:"y",order:2,
+    datalabels:{anchor:"end",align:"top",color:"#1A3F6F",font:{size:8,weight:"500"},formatter:v=>v.toFixed(0)}},
+  {type:"line",label:"Net addition (kg)",data:gumAdd,borderColor:"#D4A843",backgroundColor:"#D4A843",
+    pointBackgroundColor:"#D4A843",pointRadius:4,tension:0.3,yAxisID:"y2",order:1,
+    datalabels:{anchor:"start",align:"bottom",color:"#B8860B",font:{size:8,weight:"500"},formatter:v=>v+"kg"}}
+]},options:{
+  responsive:true,maintainAspectRatio:false,layout:{padding:{top:18,bottom:18}},
+  plugins:{legend:{display:true,position:"bottom",labels:{font:{size:11},color:T,boxWidth:10}}},
+  scales:{
+    x:{grid:{color:G},ticks:{color:T,font:{size:10},autoSkip:false,maxRotation:45}},
+    y:{position:"left",grid:{color:G},ticks:{color:"#1A3F6F",font:{size:11}},min:800},
+    y2:{position:"right",grid:{display:false},ticks:{color:"#B8860B",font:{size:11}},beginAtZero:true}
+  }
+}});
+
+// GL pie
+new Chart("glPie",{type:"doughnut",data:{
+  labels:["Federal Bank","Triplicane Perm Fund","Tenmark Capital"],
+  datasets:[{data:[1067.62,35.95,1.67],backgroundColor:["#1A3F6F","#5B92C0","#85B7EB"],borderWidth:0,hoverOffset:4}]
+},options:{
+  responsive:true,maintainAspectRatio:false,cutout:"62%",
+  plugins:{
+    legend:{display:true,position:"right",labels:{font:{size:11},color:T,padding:10,boxWidth:10}},
+    datalabels:{color:"#fff",font:{size:9,weight:"500"},formatter:(v,ctx)=>{
+      const tot=1067.62+35.95+1.67; return ctx.dataIndex===2?"":(v/tot*100).toFixed(1)+"%";
+    }}
+  }
+}});
+
+// SL pie
+new Chart("slPie",{type:"doughnut",data:{
+  labels:["Tenmark Capital Pvt Ltd","Kumbhat Financial Svcs","Sunita Finlease Ltd"],
+  datasets:[{data:[68.60,24.20,12.92],backgroundColor:["#B8860B","#D4A843","#F5DC90"],borderWidth:0,hoverOffset:4}]
+},options:{
+  responsive:true,maintainAspectRatio:false,cutout:"62%",
+  plugins:{
+    legend:{display:true,position:"right",labels:{font:{size:11},color:T,padding:10,boxWidth:10}},
+    datalabels:{color:"#fff",font:{size:9,weight:"500"},formatter:(v,ctx)=>{
+      const tot=68.60+24.20+12.92; const p=(v/tot*100).toFixed(1)+"%";
+      return ctx.dataIndex===2?"":p;
+    }}
+  }
+}});
+</script>
+</body>
+</html>
